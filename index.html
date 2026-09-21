@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <title>Учёт электросчётчиков</title>
-  <meta name="description" content="Руководство по работе с мобильным приложением Meter Parser: обход приборов учёта, съёмка, проверка распознанных данных и отправка показаний." />
+  <meta name="description"
+    content="Мобильное приложение Meter Parser: снятие показаний приборов учёта, установка и первый запуск." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#1A1A2E" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -11,6 +13,7 @@
   <link rel="stylesheet" href="vendor/fonts/fonts.css" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
+
 <body>
   <div id="app">Загрузка руководства…</div>
 
@@ -24,7 +27,7 @@
       auto2top: true,
       relativePath: false,
       homepage: 'README.md',
-      notFoundPage: 'reference/404.md',
+      notFoundPage: '404.md',
 
       // Одно боковое меню на весь сайт: во вложенных папках docsify иначе
       // сначала ищет собственное меню в своей папке и получает 404.
@@ -65,9 +68,9 @@
 
       'flexible-alerts': {
         style: 'flat',
-        note:      { label: 'Памятка' },
-        tip:       { label: 'Совет' },
-        warning:   { label: 'Внимание' },
+        note: { label: 'Памятка' },
+        tip: { label: 'Совет' },
+        warning: { label: 'Внимание' },
         attention: { label: 'Важно' }
       },
 
@@ -83,7 +86,7 @@
             a.innerHTML =
               '<span class="sidebar-brand__mark" aria-hidden="true">MP</span>' +
               '<span class="sidebar-brand__title">Учёт электросчётчиков' +
-                '<span class="sidebar-brand__sub">Руководство обходчика</span>' +
+              '<span class="sidebar-brand__sub">Руководство пользователя</span>' +
               '</span>';
             sidebar.insertBefore(a, sidebar.firstChild);
           });
@@ -143,15 +146,15 @@
             footer.className = 'sidebar-footer';
             footer.innerHTML =
               '<button class="theme-switch" type="button" aria-pressed="false">' +
-                '<span class="theme-switch__track" aria-hidden="true"><span class="theme-switch__knob"></span></span>' +
-                '<span class="theme-switch__text">Светлая тема</span>' +
+              '<span class="theme-switch__track" aria-hidden="true"><span class="theme-switch__knob"></span></span>' +
+              '<span class="theme-switch__text">Светлая тема</span>' +
               '</button>' +
               '<p class="sidebar-footer__meta">Meter Parser 1.0.0<br>АО «Мособлэнерго»</p>';
             sidebar.appendChild(footer);
 
             footer.querySelector('.theme-switch').addEventListener('click', function () {
               var next = current() === 'dark' ? 'light' : 'dark';
-              try { localStorage.setItem(KEY, next); } catch (e) {}
+              try { localStorage.setItem(KEY, next); } catch (e) { }
               root.setAttribute('data-theme', next);
               syncUI();
             });
@@ -263,4 +266,5 @@
   <script src="vendor/prism-bash.min.js"></script>
   <script src="vendor/prism-http.min.js"></script>
 </body>
+
 </html>
