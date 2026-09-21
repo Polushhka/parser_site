@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Учёт электросчётчиков</title>
+  <meta name="description" content="Руководство по работе с мобильным приложением Meter Parser: обход приборов учёта, съёмка, проверка распознанных данных и отправка показаний." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1A1A2E" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <link rel="stylesheet" href="vendor/fonts/fonts.css" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div id="app">Загрузка руководства…</div>
+
+  <script>
+    window.$docsify = {
+      name: '',
+      repo: '',
+      loadSidebar: 'sidebar.md',
+      subMaxLevel: 2,
+      maxLevel: 3,
+      auto2top: true,
+      relativePath: false,
+      homepage: 'README.md',
+      notFoundPage: 'reference/404.md',
+
+      // Одно боковое меню на весь сайт: во вложенных папках docsify иначе
+      // сначала ищет собственное меню в своей папке и получает 404.
+      alias: {
+        '/.*/sidebar.md': '/sidebar.md'
+      },
+      themeColor: '#C8102E',
+      formatUpdated: '{DD}.{MM}.{YYYY}',
+
+      search: {
+        paths: 'auto',
+        placeholder: 'Поиск по руководству',
+        noData: 'Ничего не найдено',
+        depth: 3,
+        hideOtherSidebarContent: false
+      },
+
+      pagination: {
+        previousText: 'Назад',
+        nextText: 'Дальше',
+        crossChapter: true,
+        crossChapterText: true
+      },
+
+      copyCode: {
+        buttonText: 'Копировать',
+        errorText: 'Ошибка',
+        successText: 'Скопировано'
+      },
+
+      tabs: {
+        persist: true,
+        sync: true,
+        theme: 'material',
+        tabComments: true,
+        tabHeadings: true
+      },
+
+      'flexible-alerts': {
+        style: 'flat',
+        note:      { label: 'Памятка' },
+        tip:       { label: 'Совет' },
+        warning:   { label: 'Внимание' },
+        attention: { label: 'Важно' }
+      },
+
+      plugins: [
+        // Марка в шапке бокового меню, над поиском.
+        function sidebarBrand(hook) {
+          hook.doneEach(function () {
+            var sidebar = document.querySelector('.sidebar');
+            if (!sidebar || sidebar.querySelector('.sidebar-brand')) return;
+            var a = document.createElement('a');
+            a.className = 'sidebar-brand';
+            a.href = '#/';
+            a.innerHTML =
+              '<span class="sidebar-brand__mark" aria-hidden="true">MP</span>' +
+              '<span class="sidebar-brand__title">Учёт электросчётчиков' +
+                '<span class="sidebar-brand__sub">Руководство обходчика</span>' +
+              '</span>';
+            sidebar.insertBefore(a, sidebar.firstChild);
+          });
+        },
+
+        // Переключатель светлой и тёмной темы. Живёт в подвале бокового меню,
+        // запоминает выбор и по умолчанию следует настройке системы.
+        function themeSwitch(hook) {
+          var KEY = 'mp-docs-theme';
+          var root = document.documentElement;
+          var system = window.matchMedia('(prefers-color-scheme: dark)');
+
+          function stored() {
+            try { return localStorage.getItem(KEY); } catch (e) { return null; }
+          }
+
+          // Что показано прямо сейчас: сохранённый выбор, затем уже
+          // выставленная на странице тема, затем настройка системы.
+          function current() {
+            var s = stored();
+            if (s === 'dark' || s === 'light') return s;
+            var attr = root.getAttribute('data-theme');
+            if (attr === 'dark' || attr === 'light') return attr;
+            return system.matches ? 'dark' : 'light';
+          }
+
+          function syncUI() {
+            var mode = current();
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', mode === 'dark' ? '#1A1A2E' : '#F5F6F8');
+            var btn = document.querySelector('.theme-switch');
+            if (btn) {
+              btn.setAttribute('aria-pressed', String(mode === 'dark'));
+              btn.querySelector('.theme-switch__text').textContent =
+                mode === 'dark' ? 'Тёмная тема' : 'Светлая тема';
+            }
+          }
+
+          // Без сохранённого выбора атрибут не ставим: тему решает CSS
+          // по настройке системы, и светлая страница не мелькает.
+          if (stored()) root.setAttribute('data-theme', stored());
+          syncUI();
+
+          system.addEventListener('change', syncUI);
+
+          if (typeof MutationObserver !== 'undefined') {
+            new MutationObserver(syncUI).observe(root, {
+              attributes: true, attributeFilter: ['data-theme']
+            });
+          }
+
+          hook.doneEach(function () {
+            var sidebar = document.querySelector('.sidebar');
+            if (!sidebar || sidebar.querySelector('.sidebar-footer')) return;
+
+            var footer = document.createElement('div');
+            footer.className = 'sidebar-footer';
+            footer.innerHTML =
+              '<button class="theme-switch" type="button" aria-pressed="false">' +
+                '<span class="theme-switch__track" aria-hidden="true"><span class="theme-switch__knob"></span></span>' +
+                '<span class="theme-switch__text">Светлая тема</span>' +
+              '</button>' +
+              '<p class="sidebar-footer__meta">Meter Parser 1.0.0<br>АО «Мособлэнерго»</p>';
+            sidebar.appendChild(footer);
+
+            footer.querySelector('.theme-switch').addEventListener('click', function () {
+              var next = current() === 'dark' ? 'light' : 'dark';
+              try { localStorage.setItem(KEY, next); } catch (e) {}
+              root.setAttribute('data-theme', next);
+              syncUI();
+            });
+
+            syncUI();
+          });
+        },
+
+        // Кнопка «наверх» на длинных страницах справочника.
+        function backToTop(hook) {
+          hook.mounted(function () {
+            var btn = document.createElement('button');
+            btn.className = 'to-top';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', 'Наверх страницы');
+            btn.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3.5 13 9l-1.2 1.2L8 6.4 4.2 10.2 3 9z"/></svg>';
+            document.body.appendChild(btn);
+            btn.addEventListener('click', function () {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            var content = document.querySelector('.content') || window;
+            window.addEventListener('scroll', function () {
+              btn.classList.toggle('is-visible', window.scrollY > 600);
+            }, { passive: true });
+          });
+        },
+
+        // Поиск индексирует исходный markdown, поэтому в подсказках попадаются
+        // обрывки тегов и разметки. Чистим их, не трогая подсветку совпадения.
+        function tidySearchResults(hook) {
+          function clean(s) {
+            return s
+              .replace(/^\.\.\.[^<>]{0,80}?>/, '... ')
+              .replace(/<\/?[a-zA-Z][^<>]*>/g, ' ')
+              .replace(/<\/?[a-zA-Z][^<>]*$/, ' ')
+              .replace(/\|/g, ' ')
+              .replace(/[*`#]+/g, '')
+              .replace(/\s{2,}/g, ' ');
+          }
+
+          function tidy(root) {
+            root.querySelectorAll('.matching-post p:not([data-tidy])').forEach(function (p) {
+              p.setAttribute('data-tidy', '1');
+              var walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+              var nodes = [];
+              while (walker.nextNode()) nodes.push(walker.currentNode);
+              nodes.forEach(function (n) {
+                var next = clean(n.nodeValue);
+                if (next !== n.nodeValue) n.nodeValue = next;
+              });
+            });
+          }
+
+          hook.mounted(function () {
+            var sidebar = document.querySelector('.sidebar');
+            if (!sidebar || typeof MutationObserver === 'undefined') return;
+            var obs = new MutationObserver(function () {
+              obs.disconnect();
+              tidy(sidebar);
+              obs.observe(sidebar, { childList: true, subtree: true });
+            });
+            obs.observe(sidebar, { childList: true, subtree: true });
+          });
+        },
+
+        // На узком экране прокручивается сама таблица, а не вся страница.
+        function scrollableTables(hook) {
+          hook.doneEach(function () {
+            document.querySelectorAll('.markdown-section table').forEach(function (t) {
+              if (t.parentElement && t.parentElement.classList.contains('table-scroll')) return;
+              var wrap = document.createElement('div');
+              wrap.className = 'table-scroll';
+              t.parentNode.insertBefore(wrap, t);
+              wrap.appendChild(t);
+            });
+          });
+        },
+
+        // Хлебная крошка раздела над заголовком: из какой группы бокового меню страница.
+        function sectionLabel(hook) {
+          hook.doneEach(function () {
+            var active = document.querySelector('.sidebar-nav li.active > a');
+            var old = document.querySelector('.section-label');
+            if (old) old.remove();
+            if (!active) return;
+            var group = active.closest('ul') && active.closest('ul').previousElementSibling;
+            if (!group || group.tagName !== 'P') return;
+            var h1 = document.querySelector('.markdown-section > h1');
+            if (!h1) return;
+            var tag = document.createElement('p');
+            tag.className = 'section-label';
+            tag.textContent = group.textContent;
+            h1.parentNode.insertBefore(tag, h1);
+          });
+        }
+      ]
+    };
+  </script>
+
+  <!-- Все зависимости лежат в vendor/ — сайт не обращается в интернет
+       и работает во внутренней сети и локально с диска. -->
+  <script src="vendor/docsify.min.js"></script>
+  <script src="vendor/docsify-search.min.js"></script>
+  <script src="vendor/docsify-copy-code.min.js"></script>
+  <script src="vendor/docsify-pagination.min.js"></script>
+  <script src="vendor/docsify-tabs.min.js"></script>
+  <script src="vendor/docsify-plugin-flexible-alerts.min.js"></script>
+  <script src="vendor/prism-json.min.js"></script>
+  <script src="vendor/prism-bash.min.js"></script>
+  <script src="vendor/prism-http.min.js"></script>
+</body>
+</html>

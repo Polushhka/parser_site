@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 570" width="280" height="570" role="img" aria-label="Экран проверки распознанных данных" font-family="'Golos Text','PT Sans','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="280" height="570" rx="22" fill="#0B0B14"/>
+  <rect x="6" y="6" width="268" height="558" rx="17" fill="#1A1A2E"/>
+  <rect x="112" y="13" width="56" height="7" rx="3.5" fill="#0B0B14"/>
+  <text x="24" y="38" fill="#6E7391" font-size="10" font-family="'JetBrains Mono',ui-monospace,Consolas,'Liberation Mono',monospace">9:41</text>
+  <g transform="translate(228,31)">
+    <rect x="0" y="0" width="16" height="8" rx="2" fill="none" stroke="#6E7391" stroke-width="1"/>
+    <rect x="2" y="2" width="10" height="4" rx="1" fill="#6E7391"/>
+    <rect x="17" y="2.5" width="2" height="3" rx="1" fill="#6E7391"/>
+  </g>
+  
+  <text x="24" y="74" fill="#EDECF3" font-size="17" font-weight="700" text-anchor="start">Проверьте данные</text>
+  <rect x="24" y="88" width="232" height="40" rx="7" fill="#1F2A24" stroke="#2E5C45" stroke-width="1"/>
+  <text x="36" y="104" fill="#7FD1A5" font-size="10" font-weight="400" text-anchor="start">Данные распознаны нейросетью.</text>
+  <text x="36" y="118" fill="#7FD1A5" font-size="10" font-weight="400" text-anchor="start">Отредактируйте при необходимости.</text>
+
+  <text x="24" y="146" fill="#9095AE" font-size="10" font-weight="500" text-anchor="start">№ прибора учёта</text><rect x="24" y="153" width="232" height="32" rx="7" fill="#20203A" stroke="#3A3A5E" stroke-width="1"/><text x="35" y="174" fill="#EDECF3" font-size="12.5" font-weight="500" text-anchor="start" font-family="'JetBrains Mono',ui-monospace,Consolas,'Liberation Mono',monospace">1234567890</text>
+  <text x="24" y="200" fill="#9095AE" font-size="10" font-weight="500" text-anchor="start">Показание</text><rect x="24" y="207" width="232" height="32" rx="7" fill="#20203A" stroke="#3A3A5E" stroke-width="1"/><text x="35" y="228" fill="#EDECF3" font-size="12.5" font-weight="500" text-anchor="start" font-family="'JetBrains Mono',ui-monospace,Consolas,'Liberation Mono',monospace">001234</text>
+  <text x="24" y="254" fill="#9095AE" font-size="10" font-weight="500" text-anchor="start">Тарифность</text><rect x="24" y="261" width="110" height="32" rx="7" fill="#20203A" stroke="#3A3A5E" stroke-width="1"/><text x="35" y="282" fill="#EDECF3" font-size="12.5" font-weight="500" text-anchor="start" font-family="'JetBrains Mono',ui-monospace,Consolas,'Liberation Mono',monospace">T1</text>
+  <text x="146" y="254" fill="#9095AE" font-size="10" font-weight="500" text-anchor="start">Разрядность</text><rect x="146" y="261" width="110" height="32" rx="7" fill="#20203A" stroke="#3A3A5E" stroke-width="1"/><text x="157" y="282" fill="#EDECF3" font-size="12.5" font-weight="500" text-anchor="start" font-family="'JetBrains Mono',ui-monospace,Consolas,'Liberation Mono',monospace">1</text>
+  <text x="24" y="308" fill="#9095AE" font-size="10" font-weight="500" text-anchor="start">Тип прибора</text><rect x="24" y="315" width="232" height="32" rx="7" fill="#20203A" stroke="#3A3A5E" stroke-width="1"/><text x="35" y="336" fill="#EDECF3" font-size="12.5" font-weight="500" text-anchor="start" font-family="'JetBrains Mono',ui-monospace,Consolas,'Liberation Mono',monospace">Меркурий 230</text>
+
+  <rect x="24" y="366" width="232" height="42" rx="9" fill="#C8102E"/><text x="140.0" y="391.5" fill="#FFF3F4" font-size="13" font-weight="600" text-anchor="middle">Отправить</text>
+  <rect x="24" y="418" width="110" height="36" rx="9" fill="none" stroke="#3A3A5E" stroke-width="1"/><text x="79.0" y="440.5" fill="#EDECF3" font-size="10.5" font-weight="600" text-anchor="middle">Посмотреть фото</text>
+  <rect x="146" y="418" width="110" height="36" rx="9" fill="none" stroke="#3A3A5E" stroke-width="1"/><text x="201.0" y="440.5" fill="#EDECF3" font-size="11.5" font-weight="600" text-anchor="middle">Переснять</text>
+
+  <text x="140" y="482" fill="#6E7391" font-size="10" font-weight="normal" text-anchor="middle">Нужно заполнить хотя бы номер</text>
+  <text x="140" y="496" fill="#6E7391" font-size="10" font-weight="normal" text-anchor="middle">прибора или показание</text>
+
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 570" width="280" height="570" role="img" aria-label="Главный экран приложения" font-family="'Golos Text','PT Sans','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="280" height="570" rx="22" fill="#0B0B14"/>
+  <rect x="6" y="6" width="268" height="558" rx="17" fill="#1A1A2E"/>
+  <rect x="112" y="13" width="56" height="7" rx="3.5" fill="#0B0B14"/>
+  <text x="24" y="38" fill="#6E7391" font-size="10" font-family="'JetBrains Mono',ui-monospace,Consolas,'Liberation Mono',monospace">9:41</text>
+  <g transform="translate(228,31)">
+    <rect x="0" y="0" width="16" height="8" rx="2" fill="none" stroke="#6E7391" stroke-width="1"/>
+    <rect x="2" y="2" width="10" height="4" rx="1" fill="#6E7391"/>
+    <rect x="17" y="2.5" width="2" height="3" rx="1" fill="#6E7391"/>
+  </g>
+  
+  <text x="24" y="90" fill="#EDECF3" font-size="22" font-weight="700" text-anchor="start">Учёт</text>
+  <text x="24" y="116" fill="#EDECF3" font-size="22" font-weight="700" text-anchor="start">электросчётчиков</text>
+  <rect x="226" y="70" width="30" height="30" rx="8" fill="#262640" stroke="#3A3A5E" stroke-width="1"/>
+  <g stroke="#9095AE" stroke-width="1.3" fill="none">
+    <circle cx="241" cy="85" r="4.2"/>
+    <path d="M241 77.5v2.4M241 90.1v2.4M233.5 85h2.4M246.1 85h2.4M235.7 79.7l1.7 1.7M244.6 88.6l1.7 1.7M246.3 79.7l-1.7 1.7M237.4 88.6l-1.7 1.7"/>
+  </g>
+  <text x="24" y="158" fill="#9095AE" font-size="12" font-weight="400" text-anchor="start">Выберите действие</text>
+
+  <rect x="24" y="176" width="232" height="78" rx="11" fill="#262640" stroke="#3A3A5E" stroke-width="1"/>
+  <g transform="translate(42,202)" fill="none" stroke="#E8425A" stroke-width="1.6">
+    <rect x="0" y="3" width="22" height="17" rx="3"/>
+    <circle cx="11" cy="11.5" r="5"/>
+    <path d="M7 3l2-3h4l2 3"/>
+  </g>
+  <text x="80" y="208" fill="#EDECF3" font-size="14" font-weight="600" text-anchor="start">Внести показание</text>
+  <text x="80" y="227" fill="#9095AE" font-size="11" font-weight="400" text-anchor="start">Сфотографировать счётчик</text>
+  <text x="80" y="242" fill="#9095AE" font-size="11" font-weight="400" text-anchor="start">и отправить показание</text>
+
+  <rect x="24" y="266" width="232" height="78" rx="11" fill="#262640" stroke="#3A3A5E" stroke-width="1"/>
+  <g transform="translate(42,292)" fill="none" stroke="#9095AE" stroke-width="1.6">
+    <rect x="0" y="0" width="20" height="23" rx="3"/>
+    <path d="M5 7h10M5 12h10M5 17h6"/>
+  </g>
+  <text x="80" y="298" fill="#EDECF3" font-size="13.5" font-weight="600" text-anchor="start">Посмотреть внесённые</text>
+  <text x="80" y="317" fill="#9095AE" font-size="11" font-weight="400" text-anchor="start">Показания за сегодня</text>
+  <text x="80" y="332" fill="#9095AE" font-size="11" font-weight="400" text-anchor="start">с поиском по номеру</text>
+
+  <line x1="24" y1="380" x2="256" y2="380" stroke="#3A3A5E" stroke-width="1"/>
+  <text x="24" y="402" fill="#6E7391" font-size="10.5" font-weight="400" text-anchor="start">Шестерёнка справа вверху открывает</text>
+  <text x="24" y="417" fill="#6E7391" font-size="10.5" font-weight="400" text-anchor="start">настройки адреса сервера.</text>
+
+</svg>
