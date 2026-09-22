@@ -61,9 +61,11 @@
    в обе стороны. Сами компоненты стилизуются только через переменные. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg:         var(--night);
+    /* Не #1A1A2E: это цвет заставки приложения, и страница на нём сливалась
+       со скриншотами. Фон сайта нарочно нейтральнее и темнее экранов. */
+    --bg:         #121214;
     --bg-raised:  #21213A;
-    --bg-sunken:  #14142A;
+    --bg-sunken:  #0A0A0C;
     --fg:         var(--bone);
     --fg-muted:   #A3A8BC;
     --fg-faint:   #7C8299;
@@ -82,9 +84,9 @@
 }
 
 :root[data-theme='dark'] {
-  --bg:         var(--night);
+  --bg:         #121214;
   --bg-raised:  #21213A;
-  --bg-sunken:  #14142A;
+  --bg-sunken:  #0A0A0C;
   --fg:         var(--bone);
   --fg-muted:   #A3A8BC;
   --fg-faint:   #7C8299;
@@ -894,7 +896,8 @@ pre:hover .docsify-copy-code-button,
 .markdown-section .register__caption b { color: var(--fg); font-weight: 600; display: block; }
 
 /* --------------------------------------------------------------------------
-   Схемы экранов
+   Скриншоты экранов — рамка снизу их «отклеивает» от фона страницы:
+   на тёмной теме их собственный тёмно-синий фон иначе сливался с --bg.
    -------------------------------------------------------------------------- */
 
 .screens {
@@ -911,10 +914,17 @@ pre:hover .docsify-copy-code-button,
   margin: 0;
 }
 
-.screen img {
+.screen img,
+.screen-wide img,
+.pair img {
   display: block;
+  box-sizing: border-box;
   width: 100%;
-  border-radius: 14px;
+  padding: 9px;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule-firm);
+  border-radius: 22px;
+  box-shadow: 0 14px 30px rgba(0,0,0,.28);
 }
 
 .screen figcaption {
@@ -928,7 +938,6 @@ pre:hover .docsify-copy-code-button,
 .screen figcaption b { color: var(--fg-muted); font-weight: 600; }
 
 .screen-wide { max-width: var(--measure); margin: 0 0 28px; }
-.screen-wide img { display: block; width: 100%; }
 .screen-wide figcaption { margin-top: 10px; font-size: 0.8125rem; color: var(--fg-faint); }
 
 /* Пары «схема + текст» */
@@ -941,7 +950,6 @@ pre:hover .docsify-copy-code-button,
   max-width: 100%;
 }
 
-.pair img { width: 100%; border-radius: 14px; display: block; }
 .pair > div > *:first-child { margin-top: 0; }
 .pair > div > *:last-child { margin-bottom: 0; }
 

@@ -7,7 +7,7 @@
   <meta name="description"
     content="Мобильное приложение Meter Parser: снятие показаний приборов учёта, установка и первый запуск." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#1A1A2E" />
+  <meta name="theme-color" content="#121214" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
   <link rel="stylesheet" href="vendor/fonts/fonts.css" />
@@ -116,7 +116,7 @@
           function syncUI() {
             var mode = current();
             var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', mode === 'dark' ? '#1A1A2E' : '#F5F6F8');
+            if (meta) meta.setAttribute('content', mode === 'dark' ? '#121214' : '#F5F6F8');
             var btn = document.querySelector('.theme-switch');
             if (btn) {
               btn.setAttribute('aria-pressed', String(mode === 'dark'));
